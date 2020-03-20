@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Color!</title>
+</head>
+<body align="center" style="background-color: #000000">
+<script>
+    let name='';
+    let redValue = 0;
+    let greenValue = 0;
+    let blueValue = 0;
+
+    function rgb() {
+        return "rgb("+redValue+","+greenValue+","+blueValue+")"
+    }
+
+    function updateBackground() {
+        document.body.style.backgroundColor = rgb();
+    }
+
+    function updateInputs() {
+        document.getElementById('redSlider').value = redValue;
+        document.getElementById('redInput').value = redValue;
+        document.getElementById('greenSlider').value = greenValue;
+        document.getElementById('greenInput').value = greenValue;
+        document.getElementById('blueSlider').value = blueValue;
+        document.getElementById('blueInput').value = blueValue;
+    }
+
+    function cap(color){
+        if (color==='red') if (document.getElementById('redInput').value > 255) document.getElementById('redInput').value = 255;
+        if (color==='green') if (document.getElementById('greenInput').value > 255) document.getElementById('greenInput').value = 255;
+        if (color==='blue') if (document.getElementById('blueInput').value > 255) document.getElementById('blueInput').value = 255;
+    }
+
+    function save() {
+        let newColor = {
+            name: document.name,
+            red: redValue,
+            green: greenValue,
+            blue: blueValue
+        };
+        let jsonColor = JSON.stringify(newColor);
+
+        //console.log(newColor);
+        //console.log(jsonColor);
+        console.log('Color '+name+' Saved!');
+
+        document.cookie = jsonColor;
+
+    }
+
+    function load() {
+        let savedColors = JSON.parse(document.cookie);
+        redValue = savedColors.red;
+        greenValue = savedColors.green;
+        blueValue = savedColors.blue;
+        updateInputs();
+        updateBackground();
+        //console.log(savedColors);
+    }
+
+</script>
+
+<p style="background-color: #ff0000cc"><b> Red </b>
+<br>
+<input type="number" value="0" id="redInput" size="3" oninput="
+    cap('red');
+    document.getElementById('redSlider').value = document.getElementById('redInput').value;
+    redValue = document.getElementById('redInput').value;
+    updateBackground();">
+<input type="range" min="0" max="255" value="0" id="redSlider" oninput="
+    document.getElementById('redInput').value = document.getElementById('redSlider').value;
+    redValue = document.getElementById('redSlider').value;
+    updateBackground();">
+</p><br>
+<p style="background-color: #00ff00cc"><b> Green </b><br>
+<input type="number" value="0" id="greenInput" size="3" oninput="
+    cap('green');
+    document.getElementById('greenSlider').value= document.getElementById('greenInput').value;
+    greenValue = document.getElementById('greenInput').value;
+    updateBackground();">
+<input type="range" min="0" max="255" value="0" id="greenSlider" oninput="
+    document.getElementById('greenInput').value = document.getElementById('greenSlider').value;
+    greenValue = document.getElementById('greenSlider').value;
+    updateBackground();">
+</p><br>
+<p style="background-color: #0080ffcc"><b> Blue </b>
+<br>
+<input type="number" value="0" id="blueInput" size="3" oninput="
+    cap('blue');
+    document.getElementById('blueSlider').value = document.getElementById('blueInput').value;
+    blueValue = document.getElementById('blueInput').value;
+    updateBackground();">
+<input type="range" min="0" max="255" value="0" id="blueSlider" oninput="
+    document.getElementById('blueInput').value = document.getElementById('blueSlider').value;
+    blueValue = document.getElementById('blueSlider').value;
+    updateBackground();">
+</p><br>
+
+
+<input type="text" id="nameEntry" placeholder="Color Name" oninput="document.name = document.getElementById('nameEntry').value;">
+<br><br>
+<input type="submit" value="Save" onclick="save();">
+<input type="submit" value="Load" onclick="load();">
+
+</body>
+</html>

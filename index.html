@@ -12,7 +12,7 @@
     let blueValue = 0;
 
     function rgb() {
-        return "rgb("+redValue+","+greenValue+","+blueValue+")"
+        return "rgb("+redValue+","+greenValue+","+blueValue+")";
     }
 
     function updateBackground() {
@@ -45,7 +45,7 @@
 
         //console.log(newColor);
         //console.log(jsonColor);
-        console.log('Color '+name+' Saved!');
+        console.log('Color "'+ document.name +'" Saved!');
 
         document.cookie = jsonColor;
 
@@ -58,14 +58,13 @@
         blueValue = savedColors.blue;
         updateInputs();
         updateBackground();
-        //console.log(savedColors);
+        console.log('Color "'+ savedColors.name +'" Loaded!');
     }
 
 </script>
 
-<p style="background-color: #ff0000cc;"><b> Red </b>
-<br>
-<input type="number" value="0" id="redInput" size="3" oninput="
+<p style="background-color: #ff0000cc;"><b> Red </b><br>
+<input type="number" value="0" id="redInput" oninput="
     cap('red');
     document.getElementById('redSlider').value = document.getElementById('redInput').value;
     redValue = document.getElementById('redInput').value;
@@ -75,8 +74,9 @@
     redValue = document.getElementById('redSlider').value;
     updateBackground();"><br><br>
 </p>
+
 <p style="background-color: #00ff00cc;"><b> Green </b><br>
-<input type="number" value="0" id="greenInput" size="3" oninput="
+<input type="number" value="0" id="greenInput" oninput="
     cap('green');
     document.getElementById('greenSlider').value= document.getElementById('greenInput').value;
     greenValue = document.getElementById('greenInput').value;
@@ -86,9 +86,9 @@
     greenValue = document.getElementById('greenSlider').value;
     updateBackground();"><br><br>
 </p>
-<p style="background-color: #0080ffcc;"><b> Blue </b>
-<br>
-<input type="number" value="0" id="blueInput" size="3" oninput="
+
+<p style="background-color: #0080ffcc;"><b> Blue </b><br>
+<input type="number" value="0" id="blueInput" oninput="
     cap('blue');
     document.getElementById('blueSlider').value = document.getElementById('blueInput').value;
     blueValue = document.getElementById('blueInput').value;
@@ -99,8 +99,7 @@
     updateBackground();"><br><br>
 </p>
 
-
-<input type="text" id="nameEntry" style="display: none" placeholder="Color Name" oninput="document.name = document.getElementById('nameEntry').value;">
+<input type="text" id="nameEntry" placeholder="Color Name" oninput="document.name = document.getElementById('nameEntry').value;">
 <br><br>
 <input type="submit" value="Save" onclick="save();">
 <input type="submit" value="Load" onclick="load();">

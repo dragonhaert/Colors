@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Color!</title>
 </head>
-<body align="center" style="background-color: #000000">
+<body align="center" style="margin-left:35%; margin-right: 35%; background-color: #000000">
 <script>
     let name='';
     let redValue = 0;
@@ -63,7 +63,7 @@
 
 </script>
 
-<p style="background-color: #ff0000cc"><b> Red </b>
+<p style="background-color: #ff0000cc;"><b> Red </b>
 <br>
 <input type="number" value="0" id="redInput" size="3" oninput="
     cap('red');
@@ -75,7 +75,7 @@
     redValue = document.getElementById('redSlider').value;
     updateBackground();"><br><br>
 </p>
-<p style="background-color: #00ff00cc"><b> Green </b><br>
+<p style="background-color: #00ff00cc;"><b> Green </b><br>
 <input type="number" value="0" id="greenInput" size="3" oninput="
     cap('green');
     document.getElementById('greenSlider').value= document.getElementById('greenInput').value;
@@ -86,7 +86,7 @@
     greenValue = document.getElementById('greenSlider').value;
     updateBackground();"><br><br>
 </p>
-<p style="background-color: #0080ffcc"><b> Blue </b>
+<p style="background-color: #0080ffcc;"><b> Blue </b>
 <br>
 <input type="number" value="0" id="blueInput" size="3" oninput="
     cap('blue');

@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Color!</title>
 </head>
-<body align="center" style="margin-left:35%; margin-right: 35%; background-color: #000000">
+
 <script>
-    let name='';
     let redValue = 0;
     let greenValue = 0;
     let blueValue = 0;
 
     function rgb() {
-        return "rgb("+redValue+","+greenValue+","+blueValue+")";
+        return "rgb("+redValue+","+greenValue+","+blueValue+")"
     }
 
     function updateBackground() {
@@ -20,89 +20,75 @@
     }
 
     function updateInputs() {
-        document.getElementById('redSlider').value = redValue;
-        document.getElementById('redInput').value = redValue;
-        document.getElementById('greenSlider').value = greenValue;
-        document.getElementById('greenInput').value = greenValue;
-        document.getElementById('blueSlider').value = blueValue;
-        document.getElementById('blueInput').value = blueValue;
-    }
-
-    function cap(color){
-        if (color==='red') if (document.getElementById('redInput').value > 255) document.getElementById('redInput').value = 255;
-        if (color==='green') if (document.getElementById('greenInput').value > 255) document.getElementById('greenInput').value = 255;
-        if (color==='blue') if (document.getElementById('blueInput').value > 255) document.getElementById('blueInput').value = 255;
-    }
-
-    function save() {
-        let newColor = {
-            name: document.name,
-            red: redValue,
-            green: greenValue,
-            blue: blueValue
-        };
-        let jsonColor = JSON.stringify(newColor);
-
-        //console.log(newColor);
-        //console.log(jsonColor);
-        console.log('Color "'+ document.name +'" Saved!');
-
-        document.cookie = jsonColor;
-
-    }
-
-    function load() {
-        let savedColors = JSON.parse(document.cookie);
-        redValue = savedColors.red;
-        greenValue = savedColors.green;
-        blueValue = savedColors.blue;
-        updateInputs();
-        updateBackground();
-        console.log('Color "'+ savedColors.name +'" Loaded!');
+        document.getElementsByClassName('red').value = redValue;
+        document.getElementsByClassName('green').value = greenValue;
+        document.getElementsByClassName('blue').value = blueValue;
     }
 
 </script>
+<body style="background-color: #000000" a>
+    <span>
+    <div style="background-color: #ff0000cc;width: fit-content;padding:1rem">
+        <b> Red </b><br>
 
-<p style="background-color: #ff0000cc;"><b style="font-size: 40px"> Red </b><br>
-<input type="number" value="0" id="redInput" oninput="
-    cap('red');
-    document.getElementById('redSlider').value = document.getElementById('redInput').value;
-    redValue = document.getElementById('redInput').value;
-    updateBackground();">
-<input type="range" min="0" max="255" value="0" id="redSlider" oninput="
-    document.getElementById('redInput').value = document.getElementById('redSlider').value;
-    redValue = document.getElementById('redSlider').value;
-    updateBackground();"><br><br>
-</p>
+        <input type="number" value="0" id="redInput" size="2" oninput="
+            if (document.getElementById('redInput').value > 255) document.getElementById('redInput').value = 255;
+            else if (document.getElementById('redInput').value < 0) document.getElementById('redInput').value = 0;
+            redValue = document.getElementById('redInput').value;
+            document.getElementById('redSlider').value = redValue;
+            updateBackground();">
 
-<p style="background-color: #00ff00cc;"><b style="font-size: 40px"> Green </b><br>
-<input type="number" value="0" id="greenInput" oninput="
-    cap('green');
-    document.getElementById('greenSlider').value= document.getElementById('greenInput').value;
-    greenValue = document.getElementById('greenInput').value;
-    updateBackground();">
-<input type="range" min="0" max="255" value="0" id="greenSlider" oninput="
-    document.getElementById('greenInput').value = document.getElementById('greenSlider').value;
-    greenValue = document.getElementById('greenSlider').value;
-    updateBackground();"><br><br>
-</p>
+        <input type="range" min="0" max="255" value="0" id="redSlider" oninput="
+            redValue = document.getElementById('redSlider').value;
+            document.getElementById('redInput').value = redValue
+            updateBackground();">
+    </div><br>
 
-<p style="background-color: #0080ffcc;"><b style="font-size: 40px"> Blue </b><br>
-<input type="number" value="0" id="blueInput" oninput="
-    cap('blue');
-    document.getElementById('blueSlider').value = document.getElementById('blueInput').value;
-    blueValue = document.getElementById('blueInput').value;
-    updateBackground();">
-<input type="range" min="0" max="255" value="0" id="blueSlider" oninput="
-    document.getElementById('blueInput').value = document.getElementById('blueSlider').value;
-    blueValue = document.getElementById('blueSlider').value;
-    updateBackground();"><br><br>
-</p>
+    <div style="background-color: #00ff00cc;width: fit-content; padding:1rem">
+        <b> Green </b><br>
 
-<input type="text" id="nameEntry" placeholder="Color Name" oninput="document.name = document.getElementById('nameEntry').value;">
-<br><br>
-<input type="submit" value="Save" onclick="save();">
-<input type="submit" value="Load" onclick="load();">
+        <input type="number" value="0" id="greenInput" class="green" oninput="
+            if (document.getElementById('greenInput').value > 255) document.getElementById('greenInput').value = 255;
+            else if (document.getElementById('greenInput').value < 0) document.getElementById('greenInput').value = 0;
+            greenValue = document.getElementById('greenInput').value;
+            document.getElementById('greenSlider').value= greenValue;
+            updateBackground();">
+
+        <input type="range" min="0" max="255" value="0" id="greenSlider" class="green" oninput="
+            greenValue = document.getElementById('greenSlider').value;
+            document.getElementById('greenInput').value = greenValue;
+            updateBackground();">
+    </div><br>
+
+    <div style="background-color: #0080ffcc;width: fit-content; padding:1rem">
+        <b> Blue </b><br>
+
+        <input type="number" value="0" id="blueInput" class="blue" oninput="
+            if (document.getElementById('blueInput').value > 255) document.getElementById('blueInput').value = 255;
+            else if (document.getElementById('blueInput').value < 0) document.getElementById('blueInput').value = 0;
+            blueValue = document.getElementById('blueInput').value;
+            document.getElementById('blueSlider').value = blueValue;
+            updateBackground();">
+
+        <input type="range" min="0" max="255" value="0" id="blueSlider" class="blue" oninput="
+            blueValue = document.getElementById('blueSlider').value;
+            document.getElementById('blueInput').value = blueValue;
+            updateBackground();">
+    </div>
+    <br>
+    <button type="button" id="randomize" onclick="
+        redValue = Math.round(Math.random() * 255 + 1);
+        document.getElementById('redInput').value = redValue;
+        document.getElementById('redSlider').value = redValue;
+        greenValue = Math.round(Math.random() * 255 + 1);
+        document.getElementById('greenInput').value = greenValue;
+        document.getElementById('greenSlider').value = greenValue;
+        blueValue = Math.round(Math.random() * 255 + 1);
+        document.getElementById('blueInput').value = blueValue;
+        document.getElementById('blueSlider').value = blueValue;
+        updateBackground();
+    ">Randomize!</button>
+    </span>
 
 </body>
 </html>
